@@ -6,40 +6,52 @@
 /*   By: yerbs <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:35:52 by yerbs             #+#    #+#             */
-/*   Updated: 2023/11/16 11:55:58 by yerbs            ###   ########.fr       */
+/*   Updated: 2023/11/22 09:56:42 by yerbs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	ft_formats(va_list args, const char format)
+int	ft_formats(va_list args, const char format)
 {
+	int	len;
+
+	len = 0;
 	if (format == 'c')
-		ft_putchar(va_arg(args, int));
+		len = ft_printchar(va_arg(args, int));
 	else if (format == 's')
-		ft_putstr(va_arg(args, char *));
+		len += ft_printstr(va_arg(args, char *));
+	else if (format == 'd' || format == 'i')
+		len += ft_printnbr(va_arg(args, int));
+	else if (format == 'p')
+		len += ft_printpointer(va_arg(args, void *));
+	return (len);
 }
 
 int ft_printf(const char *str, ...)
 {
 	int	i;
 	va_list	args;
+	int	len;
 
+	if (!str)
+		return (0);
+	len = 0;
 	i = 0;
 	va_start(args, str);
 	while(str[i])
 	{
 		if (str[i] == '%')
 		{
-			ft_formats(args, str[i + 1]);
+			len += ft_formats(args, str[i + 1]);
 			i += 2;
 		}
 		else
 		{
-			ft_putchar(str[i]);
+			len += ft_printchar(str[i]);
 			i++;
 		}
 	}
 	va_end(args);
-	return (0);
+	return (len);
 }
