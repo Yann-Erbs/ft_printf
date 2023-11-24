@@ -6,7 +6,7 @@
 #    By: yerbs <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 12:04:26 by yerbs             #+#    #+#              #
-#    Updated: 2023/11/22 09:55:39 by yerbs            ###   ########.fr        #
+#    Updated: 2023/11/24 13:13:28 by yerbs            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,10 @@ SRC = 	libft/ft_atoi.c \
 		srcs/ft_printchar.c \
 		srcs/ft_printnbr.c \
 		srcs/ft_printpointer.c \
+		srcs/ft_printhex.c \
+		srcs/ft_printpercent.c \
+		srcs/ft_printunsignednbr.c \
+		srcs/ft_uitoa.c \
 
 OBJS = ${SRC:.c=.o}
 

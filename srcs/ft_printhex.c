@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printpointer.c                                  :+:      :+:    :+:   */
+/*   ft_printhex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yerbs <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 09:49:11 by yerbs             #+#    #+#             */
-/*   Updated: 2023/11/24 12:24:52 by yerbs            ###   ########.fr       */
+/*   Created: 2023/11/24 11:43:55 by yerbs             #+#    #+#             */
+/*   Updated: 2023/11/24 11:56:14 by yerbs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_printpointer(void *ptr)
+int	ft_printhex(unsigned long n, char c)
 {
-	int	len;
+	char	*hex;
+	int	i;
 
-	len = 0;
-	if (ptr == NULL)
-		len += ft_printstr("0x0");
+	i = 0;
+	if (c == 'x')
+		hex = ft_strdup("0123456789abcdef");
 	else
+		hex = ft_strdup("0123456789ABCDEF");
+	if (n < 16)
 	{
-		len = ft_printstr("0x");
-		len += ft_printhex((unsigned long)ptr, 'x');
+		i += write(1, &hex[n % 16], 1);
+		free(hex);
+		return (i);
 	}
-	return (len);
+	i += ft_printhex(n / 16, c);
+	i += write(1, &hex[n % 16], 1);
+	free(hex);
+	return (i);
 }

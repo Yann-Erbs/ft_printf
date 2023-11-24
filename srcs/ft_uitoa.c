@@ -1,28 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printpointer.c                                  :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yerbs <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 09:49:11 by yerbs             #+#    #+#             */
-/*   Updated: 2023/11/24 12:24:52 by yerbs            ###   ########.fr       */
+/*   Created: 2023/11/24 13:03:08 by yerbs             #+#    #+#             */
+/*   Updated: 2023/11/24 13:14:25 by yerbs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_printpointer(void *ptr)
+char	*ft_uitoa(unsigned int n)
 {
-	int	len;
+	char	*result;
+	int	len;	
 
-	len = 0;
-	if (ptr == NULL)
-		len += ft_printstr("0x0");
-	else
+	len = unsigned_lenght(n);
+	result = ft_calloc(len + 1, sizeof(char));
+	if (!result)
+		return (NULL);
+	while (n)
 	{
-		len = ft_printstr("0x");
-		len += ft_printhex((unsigned long)ptr, 'x');
+		result[len - 1] = (n % 10) + 48;
+		n /= 10;
 	}
-	return (len);
+	return (result);
+}
+
+int	unsigned_lenght(unsigned int n)
+{
+	int	i;
+
+	i = 0;
+	while (n)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
 }

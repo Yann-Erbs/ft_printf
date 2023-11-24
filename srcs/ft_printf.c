@@ -6,7 +6,7 @@
 /*   By: yerbs <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:35:52 by yerbs             #+#    #+#             */
-/*   Updated: 2023/11/22 09:56:42 by yerbs            ###   ########.fr       */
+/*   Updated: 2023/11/24 12:57:54 by yerbs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	ft_formats(va_list args, const char format)
 		len += ft_printnbr(va_arg(args, int));
 	else if (format == 'p')
 		len += ft_printpointer(va_arg(args, void *));
+	else if (format == 'x' || format == 'X')
+		len += ft_printhex(va_arg(args, unsigned int), format);
+	else if (format == 'u')
+		len += ft_printunsignednbr(va_arg(args, unsigned int));
+	else if (format == '%')
+		len += ft_printpercent();
 	return (len);
 }
 
