@@ -6,7 +6,7 @@
 /*   By: yerbs <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:03:08 by yerbs             #+#    #+#             */
-/*   Updated: 2023/11/24 13:14:25 by yerbs            ###   ########.fr       */
+/*   Updated: 2023/11/28 14:12:00 by yerbs            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 char	*ft_uitoa(unsigned int n)
 {
 	char	*result;
-	int	len;	
 
-	len = unsigned_lenght(n);
-	result = ft_calloc(len + 1, sizeof(char));
+	if (n == 0)
+		return (ft_strdup("0"));
+	result = ft_calloc(unsigned_lenght(n) + 1, sizeof(char));
 	if (!result)
 		return (NULL);
 	while (n)
 	{
-		result[len - 1] = (n % 10) + 48;
+		result[unsigned_lenght(n) - 1] = (n % 10) + 48;
 		n /= 10;
 	}
 	return (result);
